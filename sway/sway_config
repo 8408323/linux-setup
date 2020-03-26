@@ -1,0 +1,193 @@
+# Disable XWayland
+# xwayland disable
+
+# Variables
+set $mod Mod4
+set $caps Mod3
+set $term termite
+set $menu wofi --show drun
+set $screenshot grim ~/images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $screenclip slurp | grim -g - ~/images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $swytch ~/dot/sway/swytch.sh
+set $bitwarden 'bwmenu --autolock 0 -c 15'
+set $lock swaylock -f -c 000000
+
+# Window borders
+default_border pixel 2
+default_floating_border normal
+hide_edge_borders smart
+
+smart_gaps on
+
+# Autostart
+exec --no-startup-id mako
+
+# Shortcuts
+bindsym $mod+Return exec $term
+bindsym $mod+Print exec $screenshot
+bindsym $mod+Shift+Print exec $screenclip
+bindsym $mod+d exec $menu
+bindsym $mod+q exec $swytch
+# [AltGr]       bindsym Mod5+i exec notify-send "Mod5+i pressed"
+# [Super/win]   bindsym Mod4+i exec notify-send "Mod4+i pressed"
+# [Hyper/caps]  bindsym Mod3+i exec notify-send "Mod3+i pressed"
+# Shift [*] Z   bindsym Mod2+i exec notify-send "Mod2+i pressed"
+# [Alt]         bindsym Mod1+i exec notify-send "Mod1+i pressed"
+bindsym $mod+z exec $bitwarden
+
+bindsym $mod+Shift+q kill
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+bindsym $caps+l exec $lock
+# bindsym $mod+Escape exec $power
+# bindsym $mod+End exec $wifi
+
+# Notifications
+# bindsym Control+Space exec makoctl dismiss
+# bindsym Control+Shift+Space exec makoctl dismiss --all
+
+# Brightness
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set +5%
+
+# Multimedia
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
+bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
+
+# MPD
+bindsym --locked XF86AudioPlay exec mpc toggle > /dev/null
+bindsym --locked XF86AudioNext exec mpc next > /dev/null
+bindsym --locked XF86AudioPrev exec mpc prev > /dev/null
+
+# Spotify and MPRIS players 
+# bindsym --locked XF86AudioPlay exec playerctl play-pause
+# bindsym --locked XF86AudioNext exec playerctl next
+# bindsym --locked XF86AudioPrev exec playerctl previous
+
+# Move your focus around
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+# vi keybinds
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# _move_ the focused window with the same, but add Shift
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# vi keybinds
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# move focus to the parent container
+bindsym $mod+a focus parent
+
+# Idle configuration
+exec swayidle -w \
+         timeout 300 $lock \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep $lock
+
+# window properties
+for_window [class="MPlayer"] inhibit_idle fullscreen
+for_window [shell="xwayland"] title_format "%title :: XWayland"
+
+# Scratchpad
+bindsym $mod+x scratchpad show
+bindsym $mod+Shift+x move scratchpad
+
+client.focused #4c7899 #285577 #ffffff #2e9ef4 #285577
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # return to default mode
+    # bindsym Return mode "default"
+    bindsym Return exec swaymsg "client.focused #4c7899 #285577 #ffffff #2e9ef4 #285577" && swaymsg mode default
+    # bindsym Escape mode "default"
+    bindsym Escape exec swaymsg "client.focused #4c7899 #285577 #ffffff #2e9ef4 #285577" && swaymsg mode default
+    
+}
+# bindsym $mod+r mode "resize"
+bindsym $mod+r exec swaymsg "client.focused #4c7899 #ff5577 #ffffff #2e9ef4 #ff5577" && swaymsg mode "resize"
+
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    # status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    status_command i3blocks
+    workspace_buttons no
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+# Touchpad
+input "1739:32382:DELL0804:00_06CB:7E7E_Touchpad" {
+    tap enabled
+    natural_scroll enabled
+}
+
+# Keyboard
+input * {
+    xkb_file /home/t/dot/sway/keyboard.xkb
+}
+
+# Auto spawn programs if not started 
+for_window [title=^ncmpcpp$] move scratchpad, focus
+bindsym Mod2+z exec sh -c "if ! swaymsg '[title=^ncmpcpp$] focus' > /dev/null ; then swaymsg exec 'termite -t ncmpcpp -e ncmpcpp' ; fi"
+
+for_window [title=^tremc$] move scratchpad, focus
+bindsym Mod2+x exec sh -c "if ! swaymsg '[title=^tremc$] focus' > /dev/null ; then swaymsg exec 'termite -t tremc -e tremc' ; fi"
+
+for_window [title=^newsboat$] move scratchpad, focus
+bindsym Mod2+c exec sh -c "if ! swaymsg '[title=^newsboat$] focus' > /dev/null ; then swaymsg exec 'termite -t newsboat -e newsboat' ; fi"
+
+include /etc/sway/config.d/*
