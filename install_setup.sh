@@ -80,6 +80,18 @@ then
     rm ~/Downloads/fiji-linux64.zip
 fi
 
+# Install Docker
+if ! program_exist docker
+then
+    sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common --fix-missing
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    # Docker does not yet support Ubuntu 20.04 LTS
+    #sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+    sudo usermod -aG docker $(users)
+fi
 
 # Install i3
 
