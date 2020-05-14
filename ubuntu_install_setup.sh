@@ -37,7 +37,7 @@ then
     cp $XDG_RUNTIME_DIR/gvfs/$(ls -1 $XDG_RUNTIME_DIR/gvfs/ | grep smb)/$(users)/bit* ~/bitbucket-sto.crt
     sudo mv ~/bitbucket-sto.crt /usr/local/share/ca-certificates/bitbucket-sto.crt
     sudo update-ca-certificates
-    gio mount smb://172.16.5.1/users$/joha -u
+    gio mount smb://172.16.5.1/users$/$(users) -u
 fi
 
 # TODO(joha): Define which sections below to install, make them optional. Maybe programs above as well.
