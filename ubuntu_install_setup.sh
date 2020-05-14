@@ -30,6 +30,8 @@ sudo snap install libreoffice
 # Setup SSH to this computer
 sudo ufw allow ssh
 
+# TODO(joha): Define which sections below to install, make them optional. Maybe programs above as well.
+
 # Certificate for git
 if ! file_exist /usr/local/share/ca-certificates/bitbucket-sto.crt
 then
@@ -39,8 +41,6 @@ then
     sudo update-ca-certificates
     gio mount smb://172.16.5.1/users$/$(users) -u
 fi
-
-# TODO(joha): Define which sections below to install, make them optional. Maybe programs above as well.
 
 # Install vpn --- https://uci.service-now.com/kb_view.do?sysparm_article=KB0010201
 if ! program_exist vpn
