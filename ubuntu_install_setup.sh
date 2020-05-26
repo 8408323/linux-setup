@@ -19,7 +19,7 @@ cd "$(dirname "$0")"
 echo -e "\n" | sudo add-apt-repository ppa:teejee2008/ppa
 
 sudo apt-get update
-sudo apt-get -y install neovim thunderbird screen nmap net-tools zsh openssh-server gvfs-bin --fix-missing
+sudo apt-get -y install neovim thunderbird screen nmap net-tools zsh openssh-server gvfs-bin i3 py3status --fix-missing
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 sudo snap install slack --classic
@@ -94,4 +94,9 @@ then
 fi
 
 # Install i3
+if ! path_exist ~/.config/i3status/
+then
+    cp -r linux-setup/.config/i3/ .config/i3/
+    cp -r linux-setup/.config/i3status/ .config/i3status/
+fi
 
