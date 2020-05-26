@@ -58,7 +58,7 @@ cpu_temperature 0 {
 
 backlight {
 	device = "intel_backlight"
-	format = "{level}% "
+	format = "{level}% 💡"
 	color = "#b58900"
 }
 
