@@ -170,12 +170,13 @@ bar {
 }
 
 # Application shortcuts
-bindsym $mod+c exec chromium-browser
+bindsym $mod+c exec google-chrome
+bindsym $mod+t exec thunderbird
 
 # Set resolution at start-up with 1 montor. Will be overwritten on purpose if multiple screens.
-exec xrandr --output eDP1 --mode 1920x1080 --rate 59.95 
+exec xrandr --output eDP-1 --mode 1920x1080 --rate 59.95
 # Set resolution at start-up with three monitors and laptop to the far most right
-exec xrandr --output eDP1 --mode 1920x1080 --rate 59.95 --output DP1-2-8  --mode 2560x1440 --right-of eDP1 --primary --rate 59.95 --output DP1-2-1-8 --mode 2560x1440 --right-of DP1-2-8 --rate 59.95
+exec xrandr --output eDP-1 --mode 1920x1080 --rate 59.95 --output DP-1-2-8  --mode 2560x1440 --right-of eDP-1 --primary --rate 59.95 --output DP-1-2-1-8 --mode 2560x1440 --right-of DP-1-2-8 --rate 59.95
 
 # Brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 -time 150
