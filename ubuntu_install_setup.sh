@@ -27,6 +27,7 @@ sudo snap install slack --classic
 sudo snap install teams-for-linux
 sudo snap install vlc
 sudo snap install libreoffice
+sudo snap install universal-ctags
 
 # Copy files
 # TODO(joha): Copy only once
