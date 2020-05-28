@@ -19,13 +19,24 @@ cd "$(dirname "$0")"
 echo -e "\n" | sudo add-apt-repository ppa:teejee2008/ppa
 
 sudo apt-get update
-sudo apt-get -y install neovim thunderbird screen nmap net-tools zsh openssh-server gvfs-bin i3 py3status --fix-missing
+sudo apt-get -y install neovim thunderbird screen nmap net-tools zsh openssh-server gvfs-bin i3 py3status fish playerctl --fix-missing
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
+
 sudo snap install slack --classic
 sudo snap install teams-for-linux
 sudo snap install vlc
 sudo snap install libreoffice
+
+# Copy files
+# TODO(joha): Copy only once
+cp -r Documents/ ~/Documents/
+cp -r Pictures/ ~/Pictures/
+cp -r Public/ ~/Public/
+
+# Neovim
+cp .vimrc ~/.config/nvim/init.vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 
 # Setup SSH to this computer
 sudo ufw allow ssh
@@ -68,6 +79,14 @@ then
     chsh -s $(which zsh)
 fi
 
+# fish
+if ! program_exist fish
+then
+    cp -r .config/fish/ ~/.config/fish/
+    sudo chsh -s $(which fish)
+    set -g -x fish_greeting ''
+fi
+
 # FIJI/ImageJ
 if ! program_exist fiji
 then
@@ -96,7 +115,7 @@ fi
 # Install i3
 if ! path_exist ~/.config/i3status/
 then
-    cp -r linux-setup/.config/i3/ .config/i3/
-    cp -r linux-setup/.config/i3status/ .config/i3status/
+    cp -r .config/i3/ ~/.config/i3/
+    cp -r .config/i3status/ ~/.config/i3status/
 fi
 
