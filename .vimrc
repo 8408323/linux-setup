@@ -26,6 +26,10 @@ Plugin 'NLKNguyen/papercolor-theme'
 
 Plugin 'ctrlpvim/ctrlp.cim'
 
+Plugin 'zxqfl/tabnine-vim'
+
+Plugin 'vim-airline/vim-airline'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -51,7 +55,6 @@ set number
 set relativenumber
 
 set nocp
-execute pathogen#infect()
 
 set history=100
 
@@ -292,7 +295,6 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 set mouse=a
-set cryptmethod=blowfish2
 
 :map <ScrollWheelUp> <C-Y>
 :map <S-ScrollWheelUp> <C-U>
@@ -330,11 +332,6 @@ set foldmethod=syntax
 "hi Folded ctermfg = Blue
 hi Folded ctermbg = DarkGray ctermfg = 154
 "hi Comment ctermfg=LightGray
-
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-let g:powerline_pycmd = 'py3'
-python3 del powerline_setup
 
 let g:PaperColor_Dark_Override = { 'background' : '#1c1c1c', 'cursorline' : '#abcdef', 'matchparen' : '#3a3a3a', 'comment' : '#5f875f' }
 
