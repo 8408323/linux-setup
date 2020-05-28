@@ -380,4 +380,11 @@ set clipboard=unnamedplus
 map <C-c> "+y<CR>
 
 " Save file as sudo
-cnoremap w! execute 'write! !sudo tee % > /dev/null' <bar> edit!
+if has("nvim")
+  "command! W w !sudo -n tee % > /dev/null || echo "Press <leader>w to authenticate and try again"
+  "map <leader>w :new<cr>:term sudo true<cr>
+else
+  cnoremap w! execute 'write! !sudo tee % > /dev/null' <bar> edit!
+end
+
+set clipboard=unnamedplus " Enable yank between terminal windows
