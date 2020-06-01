@@ -30,7 +30,7 @@ Plugin 'zxqfl/tabnine-vim'
 
 Plugin 'vim-airline/vim-airline'
 
-Plugin 'zivyangll/git-blame.vim'
+Plugin 'rhysd/git-messenger.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
