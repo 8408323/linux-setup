@@ -24,11 +24,13 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'NLKNguyen/papercolor-theme'
 " plugin from https://github.com/vim-scripts/PaperColor.vim
 
-Plugin 'ctrlpvim/ctrlp.cim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'zxqfl/tabnine-vim'
 
 Plugin 'vim-airline/vim-airline'
+
+Plugin 'zivyangll/git-blame.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -156,6 +158,9 @@ map k gk
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
 map <c-space> ?
+
+" Map <leader> to ,
+:let mapleader = ","
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
