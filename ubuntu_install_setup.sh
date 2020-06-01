@@ -19,7 +19,7 @@ cd "$(dirname "$0")"
 echo -e "\n" | sudo add-apt-repository ppa:teejee2008/ppa
 
 sudo apt-get update
-sudo apt-get -y install neovim thunderbird screen nmap net-tools zsh openssh-server gvfs-bin i3 py3status fish playerctl python3-pip --fix-missing
+sudo apt-get -y install neovim thunderbird screen nmap net-tools zsh openssh-server gvfs-bin i3 py3status fish playerctl python3-pip clang-format --fix-missing
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 
