@@ -32,6 +32,8 @@ Plugin 'vim-airline/vim-airline'
 
 Plugin 'rhysd/git-messenger.vim'
 
+Plugin 'rhysd/vim-clang-format'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -396,3 +398,13 @@ else
 end
 
 set clipboard=unnamedplus " Enable yank between terminal windows
+
+" ClangFormat
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc,h nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc,h vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+" Toggle auto formatting:
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+
