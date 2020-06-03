@@ -210,3 +210,6 @@ exec --no-startup-id feh --bg-fill ~/Pictures/winter_nature_3-wallpaper-3840x216
 # Cursor, fix size
 exec_always --no-startup-id fix_xcursor
 
+# Screen Shots
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+bindsym $mod+Print exec gnome-screenshot -i
