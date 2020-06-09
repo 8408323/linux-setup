@@ -23,11 +23,12 @@ sudo apt-get -y install neovim thunderbird screen nmap net-tools zsh openssh-ser
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 
-sudo snap install slack --classic
-sudo snap install teams-for-linux
-sudo snap install vlc
 sudo snap install libreoffice
+sudo snap install slack --classic
+sudo snap install spotify
+sudo snap install teams-for-linux
 sudo snap install universal-ctags
+sudo snap install vlc
 
 # Copy files
 # TODO(joha): Copy only once
