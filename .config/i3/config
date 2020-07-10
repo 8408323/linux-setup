@@ -204,6 +204,9 @@ bindsym XF86AudioPrev exec playerctl previous
 default_border pixel 1
 hide_edge_borders both
 
+# Set background color
+exec xsetroot -solid "#000000"
+
 # Set wallpaper
 exec --no-startup-id feh --bg-fill ~/Pictures/winter_nature_3-wallpaper-3840x2160.jpg
 
