@@ -84,7 +84,7 @@ fi
 # fish
 if ! program_exist fish
 then
-    cp -r .config/fish/ ~/.config/fish/
+    cp -r .config/fish/* ~/.config/fish/*
     sudo chsh -s $(which fish)
     set -g -x fish_greeting ''
 fi
