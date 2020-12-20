@@ -121,3 +121,9 @@ then
     cp -r .config/i3status/ ~/.config/i3status/
 fi
 
+# Backlight set up
+echo -e "Section \"Device\"
+    Identifier  \"$(xrandr --verbose | grep "Identifier" | awk 'NR == 1 {print $2}')\"
+    Driver      \"intel\"
+    Option      \"Backlight\"  \"intel_backlight\"
+EndSection" | sudo tee /etc/X11/xorg.conf > /dev/null 2>&1
