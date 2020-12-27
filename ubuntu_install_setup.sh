@@ -19,7 +19,7 @@ cd "$(dirname "$0")"
 echo -e "\n" | sudo add-apt-repository ppa:teejee2008/ppa
 
 sudo apt-get update
-sudo apt-get -y install neovim thunderbird screen nmap net-tools zsh openssh-server gvfs-bin i3 py3status fish playerctl python3-pip clang-format virtualbox bluez-tools expect --fix-missing
+sudo apt-get -y install neovim thunderbird screen nmap net-tools openssh-server gvfs-bin i3 py3status playerctl python3-pip clang-format virtualbox bluez-tools expect --fix-missing
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 
@@ -38,7 +38,14 @@ cp -r Public/ ~/Public/
 
 # Neovim
 cp .vimrc ~/.config/nvim/init.vim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+if ! path_exist ~/.config/nvim/bundle/Vundle.vim
+then
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+else
+    cd ~/.config/nvim/bundle/Vundle.vim
+    git pull > /dev/null 2>&1
+    cd - > /dev/null 2>&1
+fi
 
 # Setup SSH to this computer
 sudo ufw allow ssh
@@ -75,18 +82,20 @@ then
 fi
 
 # ZSH
-if ! program_exist zsh
-then
-    cp zsh/.* ~/ > /dev/null 2>&1
-    chsh -s $(which zsh)
-fi
+# if ! program_exist zsh
+# then
+#     sudo apt-get -y install zsh
+#     cp zsh/.* ~/ > /dev/null 2>&1
+#     chsh -s $(which zsh)
+# fi
 
 # fish
 if ! program_exist fish
 then
-    cp -r .config/fish/* ~/.config/fish/*
+    sudo apt-get -y install fish
+    cp -r .config/fish/ ~/.config/fish/
     sudo chsh -s $(which fish)
-    set -g -x fish_greeting ''
+    fish -c "set -g -x fish_greeting ''"
 fi
 
 # FIJI/ImageJ
